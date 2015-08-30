@@ -49,6 +49,10 @@ int _tmain(int argc, _TCHAR* argv[])
 	Students testLoad;
 	testLoad.loadStudents();
 
+	fileIO::clearDB();
+
+	testLoad.saveStudent();
+
 	
 	return 0;
 }
