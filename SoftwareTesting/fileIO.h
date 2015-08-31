@@ -12,7 +12,6 @@ public:
 private:
 	static Student dbEntryToStudent(std::string);
 	static std::vector<std::string> split(std::string,std::string);
-	static bool stob(std::string);
 
 };
 #endif

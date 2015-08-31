@@ -12,20 +12,35 @@
 class Student{
 private:
 	std::string name;
-	int grade;
-	std::map<std::time_t, bool> attendance;
+	std::string UID;
+	std::string email;
+	int essay1Grade;
+	int essay2Grade;
+	int termProjGrade;
+	
 	
 public:
+	Student();
+	Student(std::string, std::string, std::string, int, int, int);
 	std::string getName();
 	void setName(std::string);
 
-	int getGrade();
-	void setGrade(int);
+	std::string getUID();
+	void setUID(std::string);
 
-	std::map<std::time_t, bool> getAttendance();
-	void deleteAttendance(std::time_t);
-	void addAttendance(std::time_t, bool);
-	bool didAttend(std::time_t);
+	std::string getEmail();
+	void setEmail(std::string);
+
+	int getEssay1Grade();
+	void setEssay1Grade(int);
+	
+	int getEssay2Grade();
+	void setEssay2Grade(int);
+
+	int getTermProjGrade();
+	void setTermProjGrade(int);
+
+	
 	
 	
 };

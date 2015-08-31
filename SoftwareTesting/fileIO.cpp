@@ -8,16 +8,10 @@ void fileIO::saveStudents(std::vector<Student> studList){
 
 	for (std::vector<Student>::size_type i = 0; i != studList.size(); i++) {
 		Student stud = studList[i];
-		myfile << stud.getName() << "," << stud.getGrade();
+		
+		myfile << stud.getName() << "," << stud.getUID() <<","<< stud.getEmail() << "," << stud.getEssay1Grade() << "," <<
+			stud.getEssay2Grade() << "," << stud.getTermProjGrade() << "\n";
 
-		std::map<std::time_t, bool> attend = stud.getAttendance();
-
-		std::map<std::time_t, bool>::iterator it;
-		for (it = attend.begin(); it != attend.end(); it++)
-		{
-			myfile << "," << it->first << ' ' << it->second;
-		}
-		myfile << "\n";
 	}
 
 	myfile.close();
@@ -28,7 +22,6 @@ std::vector<Student> fileIO::loadStudents(){
 	std::vector<Student> to_return;
 	std::ifstream file("database.txt");
 	std::string line;
-	Student newStud;
 
 	while (std::getline(file, line)){
 		to_return.push_back(dbEntryToStudent(line));
@@ -50,21 +43,15 @@ Student fileIO::dbEntryToStudent(std::string line){
 	std::vector<std::string> studInfo = split(line, ",");
 
 	to_return.setName(studInfo[0]);
-	to_return.setGrade(stoi(studInfo[1]));
-	
-	for (int i = 2; i < studInfo.size(); ++i){
-		std::vector<std::string> date = split(studInfo[i], " ");
-		std::time_t t = stoi(date[0]);
-		to_return.addAttendance(t, stob(date[1]));
-	}
-
+	to_return.setUID(studInfo[1]);
+	to_return.setEmail(studInfo[2]);
+	to_return.setEssay1Grade(stoi(studInfo[3]));
+	to_return.setEssay2Grade(stoi(studInfo[4]));
+	to_return.setTermProjGrade(stoi(studInfo[5]));
 
 	return to_return;
 }
 
-bool fileIO::stob(std::string s){
-	return s != "0";
-}
 
 std::vector<std::string> fileIO::split(std::string s, std::string delimiter){
 	std::vector<std::string> to_return;
