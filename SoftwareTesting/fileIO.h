@@ -1,6 +1,17 @@
+#ifndef FILEIO_H
+#define FILEIO_H
 #include "student.h"
+#include <fstream>
+#include <iostream>
 
-class fileIO {
+static class fileIO {
 public:
-	bool addStuudent(Student);
+	static std::vector<Student> loadStudents();
+	static void saveStudents(std::vector<Student>);
+	static void clearDB();
+private:
+	static Student dbEntryToStudent(std::string);
+	static std::vector<std::string> split(std::string,std::string);
+
 };
+#endif
