@@ -3,6 +3,7 @@
 #define STUDENTS_H
 #include "fileIO.h"
 #include "student.h"
+#include <algorithm>
 
 class Students
 {
@@ -20,9 +21,10 @@ public:
 	void saveStudent();
 
 private:
-	std::vector<Student> searchStudents(std::string(Student::*)(), std::string);
+	std::vector<Student> searchStudents(std::string(Student::*)() const, std::string);
 
 };
+
 
 #endif 
 

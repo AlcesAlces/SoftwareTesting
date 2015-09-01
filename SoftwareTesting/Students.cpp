@@ -15,8 +15,11 @@ void Students::addStudent(Student in_stud){
 }
 
 void Students::deleteStudent(Student out_stud){
-	for (std::vector<Student>::iterator it = StudentList.begin(); it != StudentList.end(); ++it) {
-		/* std::cout << *it; ... */
+	
+	std::vector<Student>::iterator itemItr; 
+	itemItr = std::find(StudentList.begin(), StudentList.end(), out_stud);
+	if (itemItr != StudentList.end()) {
+		StudentList.erase(itemItr);
 	}
 }
 
@@ -31,7 +34,7 @@ void Students::saveStudent(){
 std::vector<Student> Students::searchStudents(searchBy search_by, std::string searchTerm){
 
 	
-	std::string (Student::* func)();
+	std::string (Student::* func)() const;
 
 	switch (search_by){
 		case name:
@@ -51,7 +54,7 @@ std::vector<Student> Students::searchStudents(searchBy search_by, std::string se
 
 }
 
-std::vector<Student> Students::searchStudents(std::string(Student::* func)(), std::string searchTerm){
+std::vector<Student> Students::searchStudents(std::string(Student::* func)() const, std::string searchTerm){
 	std::vector<Student> to_return;
 
 	for (int i = 0; i < StudentList.size(); ++i){
@@ -61,5 +64,14 @@ std::vector<Student> Students::searchStudents(std::string(Student::* func)(), st
 	}
 
 	return to_return;
+}
+
+bool operator==(const Student& stud1, const Student& stud2){
+	if (stud1.getName() == stud2.getName()){
+		return true;
+	}
+	else {
+		return false;
+	}
 }
 
