@@ -40,7 +40,7 @@ public:
 	int getTermProjGrade();
 	void setTermProjGrade(int);
 
-	
+	std::string printInformation();
 	
 	
 };
