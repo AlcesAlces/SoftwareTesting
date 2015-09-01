@@ -13,7 +13,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 
 	Student stud1("bill", "12345", "email", 12, 12, 12);
-	Student stud2("sue", "12345", "email", 12, 12, 12);
+	Student stud2("sue", "1234", "hello", 12, 12, 12);
 
 	for (int i = 0; i < 10; ++i){
 		students.addStudent(stud1);
@@ -23,6 +23,11 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	
 	std::vector<Student> testsearch = students.searchStudents(Students::name, "sue");
+	std::vector<Student> testsearch2 = students.searchStudents(Students::email, "hello");
+	std::vector<Student> testsearch3 = students.searchStudents(Students::ID, "12345");
+
+
+	students.deleteStudent(stud2);
 
 	
 
