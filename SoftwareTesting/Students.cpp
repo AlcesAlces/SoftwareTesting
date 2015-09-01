@@ -22,8 +22,11 @@ void Students::addStudent(Student in_stud){
 }
 
 void Students::deleteStudent(Student out_stud){
-	for (std::vector<Student>::iterator it = StudentList.begin(); it != StudentList.end(); ++it) {
-		/* std::cout << *it; ... */
+	
+	std::vector<Student>::iterator itemItr; 
+	itemItr = std::find(StudentList.begin(), StudentList.end(), out_stud);
+	if (itemItr != StudentList.end()) {
+		StudentList.erase(itemItr);
 	}
 }
 
@@ -38,7 +41,7 @@ void Students::saveStudent(){
 std::vector<Student> Students::searchStudents(searchBy search_by, std::string searchTerm){
 
 	
-	std::string (Student::* func)();
+	std::string (Student::* func)() const;
 
 	switch (search_by){
 		case name:
@@ -64,7 +67,7 @@ std::vector<Student> Students::searchStudents(std::string search_by_string, std:
 	if (search_by_string == "name")
 	{
 		search_by = name;
-	}
+}
 	else if (search_by_string == "id")
 	{
 		search_by = ID;
@@ -81,23 +84,6 @@ std::vector<Student> Students::searchStudents(std::string search_by_string, std:
 
 	std::string(Student::* func)();
 
-	switch (search_by) {
-	case name:
-		func = &Student::getName;
-		break;
-	case ID:
-		func = &Student::getUID;
-		break;
-	case email:
-		func = &Student::getEmail;
-		break;
-	default:
-		std::cout << "error in search" << std::endl;
-	}
-
-	return searchStudents(func, searchTerm);
-}
-
 std::vector<Student> Students::searchStudents(std::string(Student::* func)(), std::string searchTerm){
 	std::vector<Student> to_return;
 
@@ -108,23 +94,5 @@ std::vector<Student> Students::searchStudents(std::string(Student::* func)(), st
 	}
 
 	return to_return;
-}
-
-void Students::printAllStudents()
-{
-
-	if (StudentList.size() == 0)
-	{
-		std::cout << "No students in list" << std::endl;
-	}
-
-	else
-	{
-		for each (Student var in StudentList)
-		{
-			std::string toPrint = var.printInformation();
-			std::cout << toPrint << std::endl;
-		}
-	}
 }
 
