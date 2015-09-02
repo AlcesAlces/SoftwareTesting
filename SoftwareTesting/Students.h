@@ -22,6 +22,7 @@ public:
 	void loadStudents();
 	void saveStudent();
 	void printAllStudents();
+	void updateInfo(Student, std::vector<std::string>);
 
 private:
 	std::vector<Student> searchStudents(std::string(Student::*)() const, std::string);

@@ -129,3 +129,17 @@ void Students::printAllStudents()
 		std::cout << var.infoToPrint() << std::endl;
 	}
 }
+
+//We need a direct reference to the student object in the list in order to update it.
+void Students::updateInfo(Student toUpdate, std::vector<std::string> updateCommand)
+{
+	for (int i = 0; i < StudentList.size(); i++)
+	{
+		if (StudentList[i] == toUpdate)
+		{
+			StudentList[i].updateInfo(updateCommand[0], updateCommand[1]);
+			saveStudent();
+			break;
+		}
+	}
+}

@@ -8,7 +8,7 @@
 #include "Students.h";
 
 Students students;
-enum Command {Add = 0, Remove = 1, Search = 2, Help = -2, Invalid = -1};
+enum Command {Add = 0, Remove = 1, Search = 2, Update = 3, Help = -2, Invalid = -1};
 //Green, Red
 const WORD colors[] =
 {
@@ -116,7 +116,8 @@ void ParseCommand(Command cmd, std::vector<std::string> payload)
 	{
 		if (payload.size() == 0)
 		{
-			std::cout << "No search parameters recieved" << std::endl;
+			std::cout << "Printing all students:" << std::endl;
+			students.printAllStudents();
 		}
 		else
 		{
@@ -148,12 +149,25 @@ void ParseCommand(Command cmd, std::vector<std::string> payload)
 			queryList.printAllStudents();
 		}
 	}
+	else if (cmd == Update)
+	{
+		std::vector<Student> tempStudents = students.searchStudents(Students::ID, payload[0]);
+		
+		for (int i = 1; i < payload.size(); i++)
+		{
+			std::vector<std::string> commands = splitString(payload[i], '=');
+			students.updateInfo(tempStudents[0], commands);
+		}
+
+		students.saveStudent();
+	}
 	else if (cmd == Help)
 	{
 		std::cout << "Here are a list of all the example commands: " << std::endl;
-		std::cout << "add name,UID,email,firstscore,secondscore,thirdscore" << std::endl;
-		std::cout << "remove UID" << std::endl;
-		std::cout << "search UID=id,name=bob" << std::endl;
+		std::cout << "add <name>,<UID>,<email>,<firstscore>,<secondscore>,<thirdscore>" << std::endl;
+		std::cout << "remove <UID>" << std::endl;
+		std::cout << "search UID=<id>,name=<bob>" << std::endl;
+		std::cout << "update <UID>,UID=<id>,name=<new name>" << std::endl;
 	}
 }
 
@@ -162,6 +176,7 @@ void ParseStringToCommand(std::string input)
 
 	//For now everything is COMMMA DELIMITED
 	std::vector<std::string> split;
+	std::string originalInput = input;
 
 	if (input == "?" || input == "help" || input == "plz")
 	{
@@ -213,9 +228,13 @@ void ParseStringToCommand(std::string input)
 	{
 		toReturn = Help;
 	}
-	else if (input == "search")
+	else if (input == "search" || originalInput == "search")
 	{
 		toReturn = Search;
+	}
+	else if (input == "update")
+	{
+		toReturn = Update;
 	}
 
 	std::vector<std::string> toSend;

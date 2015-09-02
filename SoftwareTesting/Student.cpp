@@ -59,3 +59,36 @@ std::string Student::infoToPrint()
 	return toReturn;
 }
 
+bool Student::updateInfo(std::string prop, std::string val)
+{
+	if (prop == "name")
+	{
+		setName(val);
+	}
+	else if (prop == "id" || prop == "uid")
+	{
+		setUID(val);
+	}
+	else if (prop == "email")
+	{
+		setEmail(val);
+	}
+	else if (prop == "essay1grade")
+	{
+		setEssay1Grade(std::stoi(val));
+	}
+	else if (prop == "essay2grade")
+	{
+		setEssay2Grade(std::stoi(val));
+	}
+	else if (prop == "termprojgrade")
+	{
+		setTermProjGrade(std::stoi(val));
+	}
+	else
+	{
+		return false;
+	}
+
+	return true;
+}
