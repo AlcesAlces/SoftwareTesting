@@ -112,7 +112,9 @@ std::vector<Student> Students::searchStudents(std::string(Student::* func)() con
 }
 
 bool operator==(const Student& stud1, const Student& stud2){
-	if (stud1.getName() == stud2.getName()){
+	if (stud1.getName() == stud2.getName() && stud1.getUID() == stud2.getUID() && stud1.getEmail() == stud2.getEmail() &&
+		stud1.getEssay1Grade() == stud2.getEssay1Grade() && stud1.getEssay1Grade() == stud2.getEssay1Grade()
+		&& stud1.getTermProjGrade() == stud2.getTermProjGrade()){
 		return true;
 	}
 	else {

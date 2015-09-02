@@ -42,9 +42,4 @@ public:
 	std::string infoToPrint();
 };
 
-
-
-/*&& stud1.getUID == stud2.getUID && stud1.getEmail == stud2.getEmail &&
-*stud1.getEssay1Grade == *stud2.getEssay1Grade && *stud1.getEssay1Grade == *stud2.getEssay1Grade
-&& *stud1.getTermProjGrade == *stud2.getTermProjGrade*/
 #endif 
