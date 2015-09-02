@@ -12,13 +12,16 @@ public:
 
 	Students();
 	~Students();
+	Students(std::vector<Student>);
 	std::vector<Student> StudentList;
 
 	void addStudent(Student);
 	void deleteStudent(Student);
 	std::vector<Student> searchStudents(searchBy,std::string);
+	std::vector<Student> searchStudents(std::string, std::string);
 	void loadStudents();
 	void saveStudent();
+	void printAllStudents();
 
 private:
 	std::vector<Student> searchStudents(std::string(Student::*)() const, std::string);

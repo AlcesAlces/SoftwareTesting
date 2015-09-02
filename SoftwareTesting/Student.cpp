@@ -52,3 +52,10 @@ void Student::setTermProjGrade(int to_set){
 	termProjGrade = to_set;
 }
 
+std::string Student::infoToPrint()
+{
+	std::string toReturn = getName() + "," + getUID() + "," + getEmail() + "," + std::to_string(getEssay1Grade()) +
+		"," + std::to_string(getEssay2Grade()) + "," + std::to_string(getTermProjGrade());
+	return toReturn;
+}
+

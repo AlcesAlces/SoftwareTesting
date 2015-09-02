@@ -10,6 +10,14 @@ Students::~Students()
 {
 }
 
+Students::Students(std::vector<Student> toAdd)
+{
+	for each (Student var in toAdd)
+	{
+		StudentList.push_back(var);
+	}
+}
+
 void Students::addStudent(Student in_stud){
 	StudentList.push_back(in_stud);
 }
@@ -54,6 +62,43 @@ std::vector<Student> Students::searchStudents(searchBy search_by, std::string se
 
 }
 
+std::vector<Student> Students::searchStudents(std::string search_by_string, std::string searchTerm) {
+
+	searchBy search_by;
+
+	if (search_by_string == "name")
+	{
+		search_by = name;
+	}
+	else if (search_by_string == "id")
+	{
+		search_by = ID;
+	}
+	else if (search_by_string == "email")
+	{
+		search_by = email;
+	}
+
+	std::string(Student::* func)() const;
+
+	switch (search_by) {
+	case name:
+		func = &Student::getName;
+		break;
+	case ID:
+		func = &Student::getUID;
+		break;
+	case email:
+		func = &Student::getEmail;
+		break;
+	default:
+		std::cout << "error in search" << std::endl;
+	}
+
+	return searchStudents(func, searchTerm);
+
+}
+
 std::vector<Student> Students::searchStudents(std::string(Student::* func)() const, std::string searchTerm){
 	std::vector<Student> to_return;
 
@@ -75,3 +120,10 @@ bool operator==(const Student& stud1, const Student& stud2){
 	}
 }
 
+void Students::printAllStudents()
+{
+	for each (Student var in StudentList)
+	{
+		std::cout << var.infoToPrint() << std::endl;
+	}
+}

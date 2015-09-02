@@ -39,6 +39,7 @@ public:
 
 	int getTermProjGrade() const;
 	void setTermProjGrade(int);
+	std::string infoToPrint();
 };
 
 
