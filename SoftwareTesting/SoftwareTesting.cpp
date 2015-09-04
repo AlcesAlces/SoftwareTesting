@@ -32,6 +32,11 @@ void printMessageWithColor(std::string toPrint)
 		std::cout << toPrint << std::endl;
 		SetConsoleTextAttribute(hstdout, colors[0]);
 	}
+
+	else
+	{
+		std::cout << toPrint << std::endl;
+	}
 }
 
 void ParseCommand(Command cmd, std::vector<std::string> payload)
@@ -57,7 +62,12 @@ void ParseCommand(Command cmd, std::vector<std::string> payload)
 
 			if (toCheck.size() == 0)
 			{
-				//TODO: Add verification of studen't information length.
+				if (!toAdd.isValidStudent())
+				{
+					printMessageWithColor("Invalid student attribute.");
+					return;
+				}
+
 				students.addStudent(toAdd);
 				students.saveStudent();
 				std::cout << toAdd.getName() + " successfully added" << std::endl;
@@ -229,6 +239,11 @@ int _tmain(int argc, _TCHAR* argv[])
 		std::cout << "Input a command:" << std::endl;
 		std::string toPass = "";
 		std::getline(std::cin, toPass);
+
+		if (toPass == "exit")
+		{
+			break;
+		}
 
 		ParseStringToCommand(toPass);
 	}

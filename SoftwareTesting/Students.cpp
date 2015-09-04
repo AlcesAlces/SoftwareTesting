@@ -12,9 +12,9 @@ Students::~Students()
 
 Students::Students(std::vector<Student> toAdd)
 {
-	for each (Student var in toAdd)
+	for (int i = 0; i < toAdd.size(); ++i)
 	{
-		StudentList.push_back(var);
+		StudentList.push_back(toAdd[i]);
 	}
 }
 
@@ -132,10 +132,10 @@ void Students::printAllStudents()
 {
 	std::cout << std::setw(10) << "Name" << std::setw(10) << "UID" << std::setw(20) << "Email" << 
 		std::setw(9) << "Essay 1" << std::setw(9) << "Essay 2" << std::setw(9) << "Project" << std::endl;
-	for each (Student var in StudentList)
+	for (int i = 0; i < StudentList.size(); i++)
 	{
-		std::cout << std::setw(10) << var.getName() << std::setw(10) << var.getUID() << std::setw(20) << var.getEmail() <<
-			std::setw(9) << var.getEssay1Grade() << std::setw(9) << var.getEssay2Grade() << std::setw(9) << var.getTermProjGrade() << std::endl;
+		std::cout << std::setw(10) << StudentList[i].getName() << std::setw(10) << StudentList[i].getUID() << std::setw(20) << StudentList[i].getEmail() <<
+			std::setw(9) << StudentList[i].getEssay1Grade() << std::setw(9) << StudentList[i].getEssay2Grade() << std::setw(9) << StudentList[i].getTermProjGrade() << std::endl;
 	}
 }
 
