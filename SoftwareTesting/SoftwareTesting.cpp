@@ -3,7 +3,6 @@
 #include <string>
 #include <iostream>
 #include <algorithm>
-#include <Windows.h>
 #include <vector>
 #include "Students.h";
 
@@ -15,22 +14,15 @@ static const bool win = false;
 
 Students students;
 enum Command {Add = 0, Remove = 1, Search = 2, Update = 3, Help = -2, Invalid = -1};
-//Green, Red
-const WORD colors[] =
-{
-	0x0A, 0x0C
-};
 
-HANDLE hstdin = GetStdHandle(STD_INPUT_HANDLE);
-HANDLE hstdout = GetStdHandle(STD_OUTPUT_HANDLE);
 
 void printMessageWithColor(std::string toPrint)
 {
 	if (win)
 	{
-		SetConsoleTextAttribute(hstdout, colors[1]);
+		//SetConsoleTextAttribute(hstdout, colors[1]);
 		std::cout << toPrint << std::endl;
-		SetConsoleTextAttribute(hstdout, colors[0]);
+		//SetConsoleTextAttribute(hstdout, colors[0]);
 	}
 
 	else
@@ -225,12 +217,12 @@ void ParseStringToCommand(std::string input)
 	ParseCommand(toReturn, toSend);
 }
 
-int _tmain(int argc, _TCHAR* argv[])
+int _tmain(int argc, char* argv[])
 {
 	students.loadStudents();
 	if (win)
 	{
-		SetConsoleTextAttribute(hstdout, colors[0]);
+		//SetConsoleTextAttribute(hstdout, colors[0]);
 	}
 
 	std::cout << "Welcome to the student catalog thing" << std::endl;

@@ -78,10 +78,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <Text Include="make.txt" />
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fileIO.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Student.h" />
     <ClInclude Include="Students.h" />

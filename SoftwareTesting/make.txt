@@ -1,0 +1,17 @@
+SoftwareTesting: fileIO.o Student.o Students.o SoftwareTesting.o
+	g++ -o SoftwareTesting fileIO.o Student.o Students.o SoftwareTesting.o
+
+SoftwareTesting.o: SoftwareTesting.cpp fileIO.h Student.h Students.h
+	g++ -c SoftwareTesting.cpp
+
+fileIO.o: fileIO.cpp fileIO.h
+	g++ -c fileIO.cpp
+
+Student.o: Student.cpp Student.h
+	g++ -c Student.cpp
+
+Students.o: Students.cpp Students.h
+	g++ -c Students.cpp
+
+clean:
+	rm SoftwareTesting fileIO.o Student.o Students.o SoftwareTesting.o
