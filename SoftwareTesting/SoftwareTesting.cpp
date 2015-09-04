@@ -15,35 +15,17 @@ static const bool win = false;
 
 Students students;
 enum Command {Add = 0, Remove = 1, Search = 2, Update = 3, Help = -2, Invalid = -1};
-//Green, Red
-const WORD colors[] =
+
+void printMessage(std::string toPrint)
 {
-	0x0A, 0x0C
-};
-
-HANDLE hstdin = GetStdHandle(STD_INPUT_HANDLE);
-HANDLE hstdout = GetStdHandle(STD_OUTPUT_HANDLE);
-
-void printMessageWithColor(std::string toPrint)
-{
-	if (win)
-	{
-		SetConsoleTextAttribute(hstdout, colors[1]);
 		std::cout << toPrint << std::endl;
-		SetConsoleTextAttribute(hstdout, colors[0]);
-	}
-
-	else
-	{
-		std::cout << toPrint << std::endl;
-	}
 }
 
 void ParseCommand(Command cmd, std::vector<std::string> payload)
 {
 	if (cmd == Invalid)
 	{
-		printMessageWithColor("Invalid command.");
+		printMessage("Invalid command.");
 	}
 	else if (cmd == Add)
 	{
@@ -51,7 +33,7 @@ void ParseCommand(Command cmd, std::vector<std::string> payload)
 		if (payload.size() != 6)
 		{
 			//bad news throw the user an error.
-			printMessageWithColor("Command add recieved incorrect # of arguments.");
+			printMessage("Command add recieved incorrect # of arguments.");
 		}
 		else
 		{
@@ -64,7 +46,7 @@ void ParseCommand(Command cmd, std::vector<std::string> payload)
 			{
 				if (!toAdd.isValidStudent())
 				{
-					printMessageWithColor("Invalid student attribute.");
+					printMessage("Invalid student attribute.");
 					return;
 				}
 
@@ -107,7 +89,7 @@ void ParseCommand(Command cmd, std::vector<std::string> payload)
 
 			if (commands.size() != 2)
 			{
-				printMessageWithColor("Search argument recieved invalid. Format should be email=bob@gmail.com.");
+				printMessage("Search argument recieved invalid. Format should be email=bob@gmail.com.");
 			}
 
 			Students queryList = Students(students.searchStudents(commands[0],commands[1]));
@@ -118,7 +100,7 @@ void ParseCommand(Command cmd, std::vector<std::string> payload)
 
 				if (commands.size() != 2)
 				{
-					printMessageWithColor("Search argument recieved invalid. Format should be email=bob@gmail.com.");
+					printMessage("Search argument recieved invalid. Format should be email=bob@gmail.com.");
 				}
 
 				queryList = queryList.searchStudents(commands[0], commands[1]);
@@ -225,13 +207,9 @@ void ParseStringToCommand(std::string input)
 	ParseCommand(toReturn, toSend);
 }
 
-int _tmain(int argc, _TCHAR* argv[])
+int _tmain(int argc, char* argv[])
 {
 	students.loadStudents();
-	if (win)
-	{
-		SetConsoleTextAttribute(hstdout, colors[0]);
-	}
 
 	std::cout << "Welcome to the student catalog thing" << std::endl;
 	while (true)
