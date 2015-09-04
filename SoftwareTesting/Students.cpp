@@ -124,9 +124,12 @@ bool operator==(const Student& stud1, const Student& stud2){
 
 void Students::printAllStudents()
 {
+	std::cout << std::setw(10) << "Name" << std::setw(10) << "UID" << std::setw(20) << "Email" << 
+		std::setw(9) << "Essay 1" << std::setw(9) << "Essay 2" << std::setw(9) << "Project" << std::endl;
 	for each (Student var in StudentList)
 	{
-		std::cout << var.infoToPrint() << std::endl;
+		std::cout << std::setw(10) << var.getName() << std::setw(10) << var.getUID() << std::setw(20) << var.getEmail() <<
+			std::setw(9) << var.getEssay1Grade() << std::setw(9) << var.getEssay2Grade() << std::setw(9) << var.getTermProjGrade() << std::endl;
 	}
 }
 

@@ -78,7 +78,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Text Include="Database.txt" />
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
