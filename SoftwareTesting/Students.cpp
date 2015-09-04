@@ -78,6 +78,12 @@ std::vector<Student> Students::searchStudents(std::string search_by_string, std:
 	{
 		search_by = email;
 	}
+	else
+	{
+		std::cout << "Invalid property : " + search_by_string << std::endl;
+		std::vector<Student> dummy;
+		return dummy;
+	}
 
 	std::string(Student::* func)() const;
 

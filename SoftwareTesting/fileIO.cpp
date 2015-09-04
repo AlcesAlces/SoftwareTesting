@@ -40,7 +40,7 @@ void fileIO::clearDB(){
 Student fileIO::dbEntryToStudent(std::string line){
 	Student to_return;
 
-	std::vector<std::string> studInfo = split(line, ",");
+	std::vector<std::string> studInfo = split(line, ',');
 
 	to_return.setName(studInfo[0]);
 	to_return.setUID(studInfo[1]);
@@ -53,17 +53,41 @@ Student fileIO::dbEntryToStudent(std::string line){
 }
 
 
-std::vector<std::string> fileIO::split(std::string s, std::string delimiter){
-	std::vector<std::string> to_return;
+std::vector<std::string> fileIO::split(std::string s, char delimiter){
+	std::vector<std::string> toReturn;
 
-	size_t pos = 0;
-	std::string token;
-	while ((pos = s.find(delimiter)) != std::string::npos) {
-		token = s.substr(0, pos);
-		to_return.push_back(token);
-		s.erase(0, pos + delimiter.length());
+	int start = 0;
+	for (int i = 0; i < s.length(); i++)
+	{
+		if (s[i] == delimiter)
+		{
+			std::string toAdd = "";
+
+			for (int j = start; j < i; j++)
+			{
+				toAdd += s[j];
+			}
+
+			toReturn.push_back(toAdd);
+
+			if (i != s.length() - 1)
+			{
+				start = i + 1;
+			}
+		}
+
+		else if (i == s.length() - 1)
+		{
+			std::string toAdd = "";
+
+			for (int j = start; j <= i; j++)
+			{
+				toAdd += s[j];
+			}
+
+			toReturn.push_back(toAdd);
+		}
 	}
-	to_return.push_back(s);
-	return to_return;
-}
 
+	return toReturn;
+}

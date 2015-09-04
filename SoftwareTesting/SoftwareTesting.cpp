@@ -7,6 +7,12 @@
 #include <vector>
 #include "Students.h";
 
+#if defined(WIN32) || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__)
+static const bool win = true;
+#else
+static const bool win = false;
+#endif
+
 Students students;
 enum Command {Add = 0, Remove = 1, Search = 2, Update = 3, Help = -2, Invalid = -1};
 //Green, Red
@@ -14,57 +20,25 @@ const WORD colors[] =
 {
 	0x0A, 0x0C
 };
+
 HANDLE hstdin = GetStdHandle(STD_INPUT_HANDLE);
 HANDLE hstdout = GetStdHandle(STD_OUTPUT_HANDLE);
 
-std::vector<std::string> splitString(std::string toSplit, char delimiter)
+void printMessageWithColor(std::string toPrint)
 {
-	std::vector<std::string> toReturn;
-
-	int start = 0;
-	for (int i = 0; i < toSplit.length(); i++)
+	if (win)
 	{
-		if (toSplit[i] == delimiter)
-		{
-			std::string toAdd = "";
-
-			for (int j = start; j < i; j++)
-			{
-				toAdd += toSplit[j];
-			}
-
-			toReturn.push_back(toAdd);
-			
-			if (i != toSplit.length() - 1)
-			{
-				start = i+1;
-			}
-		}
-
-		else if (i == toSplit.length() - 1)
-		{
-			std::string toAdd = "";
-
-			for (int j = start; j <= i; j++)
-			{
-				toAdd += toSplit[j];
-			}
-
-			toReturn.push_back(toAdd);
-		}
+		SetConsoleTextAttribute(hstdout, colors[1]);
+		std::cout << toPrint << std::endl;
+		SetConsoleTextAttribute(hstdout, colors[0]);
 	}
-
-	return toReturn;
 }
 
 void ParseCommand(Command cmd, std::vector<std::string> payload)
 {
 	if (cmd == Invalid)
 	{
-		//Angry color
-		SetConsoleTextAttribute(hstdout, colors[1]);
-		std::cout << "Invalid command." << std::endl;
-		SetConsoleTextAttribute(hstdout, colors[0]);
+		printMessageWithColor("Invalid command.");
 	}
 	else if (cmd == Add)
 	{
@@ -72,9 +46,7 @@ void ParseCommand(Command cmd, std::vector<std::string> payload)
 		if (payload.size() != 6)
 		{
 			//bad news throw the user an error.
-			SetConsoleTextAttribute(hstdout, colors[1]);
-			std::cout << "Command add recieved incorrect # of arguments." << std::endl;
-			SetConsoleTextAttribute(hstdout, colors[0]);
+			printMessageWithColor("Command add recieved incorrect # of arguments.");
 		}
 		else
 		{
@@ -121,26 +93,22 @@ void ParseCommand(Command cmd, std::vector<std::string> payload)
 		}
 		else
 		{
-			std::vector<std::string> commands = splitString(payload[0], '=');
+			std::vector<std::string> commands = fileIO::split(payload[0], '=');
 
 			if (commands.size() != 2)
 			{
-				SetConsoleTextAttribute(hstdout, colors[1]);
-				std::cout << "Search argument recieved invalid. Format should be email=bob@gmail.com." << std::endl;
-				SetConsoleTextAttribute(hstdout, colors[0]);
+				printMessageWithColor("Search argument recieved invalid. Format should be email=bob@gmail.com.");
 			}
 
 			Students queryList = Students(students.searchStudents(commands[0],commands[1]));
 
 			for (int i = 1; i < payload.size(); i++)
 			{
-				std::vector<std::string> commands = splitString(payload[i], '=');
+				std::vector<std::string> commands = fileIO::split(payload[i], '=');
 
 				if (commands.size() != 2)
 				{
-					SetConsoleTextAttribute(hstdout, colors[1]);
-					std::cout << "Search argument recieved invalid. Format should be email=bob@gmail.com." << std::endl;
-					SetConsoleTextAttribute(hstdout, colors[0]);
+					printMessageWithColor("Search argument recieved invalid. Format should be email=bob@gmail.com.");
 				}
 
 				queryList = queryList.searchStudents(commands[0], commands[1]);
@@ -155,7 +123,7 @@ void ParseCommand(Command cmd, std::vector<std::string> payload)
 		
 		for (int i = 1; i < payload.size(); i++)
 		{
-			std::vector<std::string> commands = splitString(payload[i], '=');
+			std::vector<std::string> commands = fileIO::split(payload[i], '=');
 			students.updateInfo(tempStudents[0], commands);
 		}
 
@@ -205,7 +173,7 @@ void ParseStringToCommand(std::string input)
 
 		if (hitChar)
 		{
-			std::vector<std::string> temp = splitString(input, ',');
+			std::vector<std::string> temp = fileIO::split(input, ',');
 			for (int i = 0; i < temp.size(); i++)
 			{
 				split.push_back(temp[i]);
@@ -250,7 +218,11 @@ void ParseStringToCommand(std::string input)
 int _tmain(int argc, _TCHAR* argv[])
 {
 	students.loadStudents();
-	SetConsoleTextAttribute(hstdout, colors[0]);
+	if (win)
+	{
+		SetConsoleTextAttribute(hstdout, colors[0]);
+	}
+
 	std::cout << "Welcome to the student catalog thing" << std::endl;
 	while (true)
 	{
