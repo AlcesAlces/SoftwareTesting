@@ -31,6 +31,7 @@ std::vector<Student> fileIO::loadStudents(){
 }
 
 void fileIO::clearDB(){
+	/* http://www.cplusplus.com/reference/fstream/ofstream/open/ */
 	std::ofstream ofs;
 	ofs.open("database.txt", std::ofstream::out | std::ofstream::trunc);
 	ofs.close();
