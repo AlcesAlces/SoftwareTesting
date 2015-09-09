@@ -9,8 +9,8 @@ void fileIO::saveStudents(std::vector<Student> studList){
 	for (std::vector<Student>::size_type i = 0; i != studList.size(); i++) {
 		Student stud = studList[i];
 		
-		myfile << stud.getName() << "," << stud.getUID() <<","<< stud.getEmail() << "," << stud.getEssay1Grade() << "," <<
-			stud.getEssay2Grade() << "," << stud.getTermProjGrade() << "\n";
+		myfile << stud.getName() << ", " << stud.getUID() <<", "<< stud.getEmail() << ", " << stud.getEssay1Grade() << ", " <<
+			stud.getEssay2Grade() << ", " << stud.getTermProjGrade() << "\n";
 
 	}
 
@@ -31,6 +31,7 @@ std::vector<Student> fileIO::loadStudents(){
 }
 
 void fileIO::clearDB(){
+	/* http://www.cplusplus.com/reference/fstream/ofstream/open/ */
 	std::ofstream ofs;
 	ofs.open("database.txt", std::ofstream::out | std::ofstream::trunc);
 	ofs.close();
@@ -40,7 +41,7 @@ void fileIO::clearDB(){
 Student fileIO::dbEntryToStudent(std::string line){
 	Student to_return;
 
-	std::vector<std::string> studInfo = split(line, ',');
+	std::vector<std::string> studInfo = split(line, ' ');
 
 	to_return.setName(studInfo[0]);
 	to_return.setUID(studInfo[1]);
