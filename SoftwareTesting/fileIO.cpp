@@ -2,7 +2,6 @@
 #include <string>
 
 void fileIO::saveStudents(std::vector<Student> studList){
-	//format to store students name,grade,date bool, date bool,.....,date bool
 	std::ofstream myfile;
 	myfile.open("Database.txt");
 
