@@ -52,7 +52,7 @@ std::vector<Student> Students::searchStudents(searchBy search_by, std::string se
 			func = &Student::getUID;
 			break;
 		case email:
-			func = &Student::getEmail;
+			func = &Student::getName;
 			break;
 		default:
 			std::cout << "error in search" << std::endl;
