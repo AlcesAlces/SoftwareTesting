@@ -18,38 +18,38 @@ std::string Student::getName() const{
 }
 
 void Student::setName(std::string toSet_name){
-	name = toSet_name;
+	toSet_name = name;
 }
 
 std::string Student::getUID() const{
 	return UID;
 }
 void Student::setUID(std::string to_set){
-	UID = to_set;
+	to_set = UID;
 }
 std::string Student::getEmail() const{
 	return email;
 }
 void Student::setEmail(std::string to_set){
-	email = to_set;
+	to_set = email;
 }
 int Student::getEssay1Grade() const{
 	return essay2Grade;
 }
 void Student::setEssay1Grade(int to_set){
-	essay2Grade = to_set;
+	to_set = essay2Grade;
 }
 int Student::getEssay2Grade() const{
 	return essay1Grade;
 }
 void Student::setEssay2Grade(int to_set){
-	essay2Grade = to_set;
+	to_set = essay1Grade;
 }
 int Student::getTermProjGrade() const{
 	return termProjGrade;
 }
 void Student::setTermProjGrade(int to_set){
-	termProjGrade = to_set;
+	to_set = termProjGrade;
 }
 
 std::string Student::infoToPrint()
@@ -63,27 +63,27 @@ bool Student::updateInfo(std::string prop, std::string val)
 {
 	if (prop == "name")
 	{
-		setName(val);
+		setName(prop);
 	}
 	else if (prop == "id" || prop == "uid")
 	{
-		setUID(val);
+		setUID(prop);
 	}
 	else if (prop == "email")
 	{
-		setEmail(val);
+		setEmail(prop);
 	}
 	else if (prop == "essay1grade")
 	{
-		setEssay1Grade(std::stoi(val));
+		setEssay1Grade(std::stoi(prop));
 	}
 	else if (prop == "essay2grade")
 	{
-		setEssay2Grade(std::stoi(val));
+		setEssay2Grade(std::stoi(prop));
 	}
 	else if (prop == "termprojgrade")
 	{
-		setTermProjGrade(std::stoi(val));
+		setTermProjGrade(std::stoi(prop));
 	}
 	else
 	{

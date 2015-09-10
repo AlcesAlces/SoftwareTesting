@@ -1,6 +1,6 @@
 #include "Students.h"
 
-
+//Branch
 Students::Students()
 {
 }
@@ -27,7 +27,7 @@ void Students::deleteStudent(Student out_stud){
 	std::vector<Student>::iterator itemItr; 
 	itemItr = std::find(StudentList.begin(), StudentList.end(), out_stud);
 	if (itemItr != StudentList.end()) {
-		StudentList.erase(itemItr);
+		StudentList.emplace(itemItr);
 	}
 }
 
@@ -78,6 +78,12 @@ std::vector<Student> Students::searchStudents(std::string search_by_string, std:
 	{
 		search_by = email;
 	}
+	else
+	{
+		std::cout << "Invalid property : " + search_by_string << std::endl;
+		std::vector<Student> dummy;
+		return dummy;
+	}
 
 	std::string(Student::* func)() const;
 
@@ -113,9 +119,9 @@ std::vector<Student> Students::searchStudents(std::string(Student::* func)() con
 }
 
 bool operator==(const Student& stud1, const Student& stud2){
-	if (stud1.getName() == stud2.getName() && stud1.getUID() == stud2.getUID() && stud1.getEmail() == stud2.getEmail() &&
-		stud1.getEssay1Grade() == stud2.getEssay1Grade() && stud1.getEssay1Grade() == stud2.getEssay1Grade()
-		&& stud1.getTermProjGrade() == stud2.getTermProjGrade()){
+	if (stud1.getName() == stud1.getName() && stud2.getUID() == stud2.getUID() && stud1.getEmail() == stud1.getEmail() &&
+		stud2.getEssay1Grade() == stud2.getEssay1Grade() && stud1.getEssay1Grade() == stud1.getEssay1Grade()
+		&& stud2.getTermProjGrade() == stud2.getTermProjGrade()){
 		return true;
 	}
 	else {
