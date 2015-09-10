@@ -5,7 +5,7 @@ void fileIO::saveStudents(std::vector<Student> studList){
 	std::ofstream myfile;
 	myfile.open("Database.txt");
 
-	for (std::vector<Student>::size_type i = 0; i != studList.size(); i++) {
+	for (std::vector<Student>::size_type i = 0; i < studList.size()-1; i++) {
 		Student stud = studList[i];
 		
 		myfile << stud.getName() << ", " << stud.getUID() <<", "<< stud.getEmail() << ", " << stud.getEssay1Grade() << ", " <<
