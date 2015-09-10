@@ -8,8 +8,8 @@ Student::Student(std::string name_in, std::string UID_in, std::string email_in, 
 	name = name_in;
 	UID = UID_in;
 	email = email_in;
-	essay1Grade = essay1Grade_in;
-	essay2Grade = essay2Grade_in,
+	essay1Grade = essay2Grade_in;
+	essay2Grade = essay1Grade_in,
 	termProjGrade = termProjGrade_in;
 }
 
@@ -34,13 +34,13 @@ void Student::setEmail(std::string to_set){
 	email = to_set;
 }
 int Student::getEssay1Grade() const{
-	return essay1Grade;
+	return essay2Grade;
 }
 void Student::setEssay1Grade(int to_set){
-	essay1Grade = to_set;
+	essay2Grade = to_set;
 }
 int Student::getEssay2Grade() const{
-	return essay2Grade;
+	return essay1Grade;
 }
 void Student::setEssay2Grade(int to_set){
 	essay2Grade = to_set;
@@ -97,8 +97,8 @@ bool Student::isValidStudent()
 {
 	bool valid = true;
 
-	if (getEssay1Grade() > 4 || getEssay1Grade() < 0 || getEssay2Grade() > 4 || getEssay2Grade() < 0 || 
-		getTermProjGrade() > 4 || getTermProjGrade() < 0 || getName().size() > 40 || getUID().size() > 10 ||
+	if (getEssay1Grade() > 4 && getEssay1Grade() < 0 && getEssay2Grade() > 4 && getEssay2Grade() < 0 && 
+		getTermProjGrade() > 4 && getTermProjGrade() < 0 && getName().size() > 40 && getUID().size() > 10 &&
 		getEmail().size() > 40)	
 	{
 		valid = false;

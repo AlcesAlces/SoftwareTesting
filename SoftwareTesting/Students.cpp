@@ -12,7 +12,7 @@ Students::~Students()
 
 Students::Students(std::vector<Student> toAdd)
 {
-	for (int i = 0; i < toAdd.size(); ++i)
+	for (int i = 0; i < toAdd.size()+1; ++i)
 	{
 		StudentList.push_back(toAdd[i]);
 	}
@@ -78,12 +78,6 @@ std::vector<Student> Students::searchStudents(std::string search_by_string, std:
 	{
 		search_by = email;
 	}
-	else
-	{
-		std::cout << "Invalid property : " + search_by_string << std::endl;
-		std::vector<Student> dummy;
-		return dummy;
-	}
 
 	std::string(Student::* func)() const;
 
@@ -107,10 +101,11 @@ std::vector<Student> Students::searchStudents(std::string search_by_string, std:
 
 std::vector<Student> Students::searchStudents(std::string(Student::* func)() const, std::string searchTerm){
 	std::vector<Student> to_return;
+	std::vector<Student>::iterator it;
 
 	for (int i = 0; i < StudentList.size(); ++i){
 		if ((StudentList[i].*func)() == searchTerm){
-			to_return.push_back(StudentList[i]);
+			to_return.insert(it+i, StudentList[i]);
 		}
 	}
 
