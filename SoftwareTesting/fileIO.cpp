@@ -1,6 +1,7 @@
 #include "fileIO.h"
 #include <string>
 
+//save students into the data base file so that the it can be uploaded to the program later
 void fileIO::saveStudents(std::vector<Student> studList){
 	std::ofstream myfile;
 	myfile.open("Database.txt");
@@ -16,7 +17,7 @@ void fileIO::saveStudents(std::vector<Student> studList){
 	myfile.close();
 }
 
-
+// load students into the Students objects 
 std::vector<Student> fileIO::loadStudents(){
 	std::vector<Student> to_return;
 	std::ifstream file("database.txt");
@@ -29,6 +30,7 @@ std::vector<Student> fileIO::loadStudents(){
 	return to_return;
 }
 
+//clear the database 
 void fileIO::clearDB(){
 	/* http://www.cplusplus.com/reference/fstream/ofstream/open/ */
 	std::ofstream ofs;
@@ -36,7 +38,7 @@ void fileIO::clearDB(){
 	ofs.close();
 }
 
-
+//database entry to a student object
 Student fileIO::dbEntryToStudent(std::string line){
 	Student to_return;
 
@@ -52,7 +54,8 @@ Student fileIO::dbEntryToStudent(std::string line){
 	return to_return;
 }
 
-
+//splits string into a vector by the delimiter
+//ex hello world split by space = <<hello>,<wolrd>>
 std::vector<std::string> fileIO::split(std::string s, char delimiter){
 	std::vector<std::string> toReturn;
 

@@ -4,6 +4,7 @@ Student::Student(){
 
 }
 
+//student constuctor sets all the stuff
 Student::Student(std::string name_in, std::string UID_in, std::string email_in, int essay1Grade_in, int essay2Grade_in, int termProjGrade_in){
 	name = name_in;
 	UID = UID_in;
@@ -52,6 +53,7 @@ void Student::setTermProjGrade(int to_set){
 	to_set = termProjGrade;
 }
 
+//returns a string of students info
 std::string Student::infoToPrint()
 {
 	std::string toReturn = getName() + "," + getUID() + "," + getEmail() + "," + std::to_string(getEssay1Grade()) +
@@ -59,6 +61,7 @@ std::string Student::infoToPrint()
 	return toReturn;
 }
 
+//updates student property based the property that you set
 bool Student::updateInfo(std::string prop, std::string val)
 {
 	if (prop == "name")
@@ -93,6 +96,7 @@ bool Student::updateInfo(std::string prop, std::string val)
 	return true;
 }
 
+//check to see if the student input is valid
 bool Student::isValidStudent()
 {
 	bool valid = true;

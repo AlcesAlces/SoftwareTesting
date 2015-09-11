@@ -10,6 +10,7 @@ Students::~Students()
 {
 }
 
+//turns a vector of students into the StudentList
 Students::Students(std::vector<Student> toAdd)
 {
 	for (int i = 0; i < toAdd.size()+1; ++i)
@@ -18,29 +19,35 @@ Students::Students(std::vector<Student> toAdd)
 	}
 }
 
+//add student to the studentlist
 void Students::addStudent(Student in_stud){
 	StudentList.push_back(in_stud);
 }
 
+//deletes the input student from the student list
 void Students::deleteStudent(Student out_stud){
 	
 	std::vector<Student>::iterator itemItr; 
+
+	//searches student list till it find a match an returns an iterator
 	itemItr = std::find(StudentList.begin(), StudentList.end(), out_stud);
 	if (itemItr != StudentList.end()) {
 		StudentList.emplace(itemItr);
 	}
 }
 
+//loads students into the studentList
 void Students::loadStudents(){
 	StudentList = fileIO::loadStudents();
 }
 
+//saves student list to a file
 void Students::saveStudent(){
 	fileIO::saveStudents(StudentList);
 }
 
 std::vector<Student> Students::searchStudents(searchBy search_by, std::string searchTerm){
-
+	//creates a function pointer to the function that we are going to search by 
 	
 	std::string (Student::* func)() const;
 
@@ -63,6 +70,7 @@ std::vector<Student> Students::searchStudents(searchBy search_by, std::string se
 }
 
 std::vector<Student> Students::searchStudents(std::string search_by_string, std::string searchTerm) {
+	//creates a function pointer to the function that we are going to search by 
 
 	searchBy search_by;
 
@@ -90,7 +98,7 @@ std::vector<Student> Students::searchStudents(std::string search_by_string, std:
 	return searchStudents(search_by, searchTerm);
 
 }
-
+// iterates through the student list and compare the search term and the functions return value
 std::vector<Student> Students::searchStudents(std::string(Student::* func)() const, std::string searchTerm){
 	std::vector<Student> to_return;
 	std::vector<Student>::iterator it;
@@ -104,6 +112,7 @@ std::vector<Student> Students::searchStudents(std::string(Student::* func)() con
 	return to_return;
 }
 
+// overloaded equal operator
 bool operator==(const Student& stud1, const Student& stud2){
 	if (stud1.getName() == stud1.getName() && stud2.getUID() == stud2.getUID() && stud1.getEmail() == stud1.getEmail() &&
 		stud2.getEssay1Grade() == stud2.getEssay1Grade() && stud1.getEssay1Grade() == stud1.getEssay1Grade()
@@ -115,6 +124,7 @@ bool operator==(const Student& stud1, const Student& stud2){
 	}
 }
 
+//prints students
 void Students::printAllStudents()
 {
 	std::cout << std::setw(10) << "Name" << std::setw(10) << "UID" << std::setw(20) << "Email" << 
