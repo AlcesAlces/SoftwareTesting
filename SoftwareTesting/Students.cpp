@@ -85,23 +85,9 @@ std::vector<Student> Students::searchStudents(std::string search_by_string, std:
 		return dummy;
 	}
 
-	std::string(Student::* func)() const;
 
-	switch (search_by) {
-	case name:
-		func = &Student::getName;
-		break;
-	case ID:
-		func = &Student::getUID;
-		break;
-	case email:
-		func = &Student::getEmail;
-		break;
-	default:
-		std::cout << "error in search" << std::endl;
-	}
 
-	return searchStudents(func, searchTerm);
+	return searchStudents(search_by, searchTerm);
 
 }
 
