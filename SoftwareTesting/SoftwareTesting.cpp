@@ -10,6 +10,58 @@
 
 Students students;
 enum Command {Add = 0, Remove = 1, Search = 2, Update = 3, Help = -2, Invalid = -1};
+enum InputError { InvalidCharacter = 0, InvalidFormat = 1, InvalidSize = 2, None = -1 };
+
+InputError VerifyInputIntegrity(std::string rawString)
+{
+	bool lastWasAlphaNum = true;
+	bool lastWasDelimiter = false;
+
+	if (rawString.size() == 0)
+	{
+		return InvalidSize;
+	}
+
+	else if (!isalnum(rawString[0]))
+	{
+		return InvalidFormat;
+	}
+
+	for (int i = 1; i < rawString.size(); i++)
+	{
+		if (isalnum(rawString[i]))
+		{
+			lastWasAlphaNum = true;
+			lastWasDelimiter = false;
+			continue;
+		}
+		else if (lastWasAlphaNum)
+		{
+			if (rawString[i] == ' ' || rawString[i] == ',' || rawString[i] == '=' || rawString[i] == '@' || rawString[i] == '.')
+			{
+				lastWasDelimiter = true;
+				lastWasAlphaNum = false;
+			}
+			else
+			{
+				return InvalidCharacter;
+			}
+		}
+		else if (lastWasDelimiter)
+		{
+			return InvalidFormat;
+		}
+	}
+
+	if (lastWasAlphaNum)
+	{
+		return None;
+	}
+	else
+	{
+		return InvalidFormat;
+	}
+}
 
 // print a message
 void printMessage(std::string toPrint)
@@ -246,7 +298,23 @@ int _tmain(int argc, char* argv[])
 			break;
 		}
 
-		ParseStringToCommand(toPass);
+		switch (VerifyInputIntegrity(toPass))
+		{
+			case None:
+				ParseStringToCommand(toPass);
+				break;
+			case InvalidCharacter:
+				std::cout << "Invalid chracter in input" << std::endl;
+				break;
+			case InvalidFormat:
+				std::cout << "Invalid format detected" << std::endl;
+				break;
+			default:
+				std::cout << "Unknown error" << std::endl;
+				break;
+		}
+
+		
 	}
 	return 0;
 }
