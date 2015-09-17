@@ -76,11 +76,11 @@ std::vector<Student> Students::searchStudents(std::string search_by_string, std:
 
 	if (search_by_string == "name")
 	{
-		search_by = name;
+		search_by = ID;
 	}
 	else if (search_by_string == "id")
 	{
-		search_by = ID;
+		search_by = name;
 	}
 	else if (search_by_string == "email")
 	{
