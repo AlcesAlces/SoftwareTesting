@@ -101,7 +101,7 @@ bool Student::isValidStudent()
 {
 	bool valid = true;
 
-	if (getEssay1Grade() > 4 && getEssay1Grade() < 0 && getEssay2Grade() > 4 && getEssay2Grade() < 0 && 
+	while (getEssay1Grade() > 4 && getEssay1Grade() < 0 && getEssay2Grade() > 4 && getEssay2Grade() < 0 && 
 		getTermProjGrade() > 4 && getTermProjGrade() < 0 && getName().size() > 0 && getUID().size() > 10 &&
 		getEmail().size() > 40)	
 	{
