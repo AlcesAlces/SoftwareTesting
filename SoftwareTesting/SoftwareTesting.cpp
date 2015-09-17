@@ -72,7 +72,7 @@ void ParseCommand(Command cmd, std::vector<std::string> payload)
 		std::vector<Student> toCheck = students.searchStudents(students.ID, payload[0]);
 
 		//see if student exsist
-		if (toCheck.size() == 0)
+		if (toCheck.size() != 0)
 		{
 			std::cout << "Student does not exist." << std::endl;
 		}
