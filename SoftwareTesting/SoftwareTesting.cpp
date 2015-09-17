@@ -92,6 +92,7 @@ void ParseCommand(Command cmd, std::vector<std::string> payload)
 		if (payload.size() == 0)
 		{
 			std::cout << "Printing all students:" << std::endl;
+			return;
 			students.printAllStudents();
 		}
 		else
