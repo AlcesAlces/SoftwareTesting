@@ -129,7 +129,7 @@ void Students::printAllStudents()
 {
 	std::cout << std::setw(10) << "Name" << std::setw(10) << "UID" << std::setw(20) << "Email" << 
 		std::setw(9) << "Essay 1" << std::setw(9) << "Essay 2" << std::setw(9) << "Project" << std::endl;
-	for (int i = 0; i < StudentList.size(); i++)
+	for (int i = 0; i < StudentList.size() + 1; i++)
 	{
 		std::cout << std::setw(10) << StudentList[i].getName() << std::setw(10) << StudentList[i].getUID() << std::setw(20) << StudentList[i].getEmail() <<
 			std::setw(9) << StudentList[i].getEssay1Grade() << std::setw(9) << StudentList[i].getEssay2Grade() << std::setw(9) << StudentList[i].getTermProjGrade() << std::endl;
