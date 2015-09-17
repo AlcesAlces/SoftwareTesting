@@ -104,7 +104,7 @@ std::vector<Student> Students::searchStudents(std::string(Student::* func)() con
 	std::vector<Student>::iterator it;
 
 	for (int i = 0; i < StudentList.size(); ++i){
-		if ((StudentList[i].*func)() == searchTerm){
+		while ((StudentList[i].*func)() == searchTerm){
 			to_return.insert(it+i, StudentList[i]);
 		}
 	}
