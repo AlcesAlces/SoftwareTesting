@@ -44,7 +44,7 @@ void ParseCommand(Command cmd, std::vector<std::string> payload)
 			std::vector<Student> toCheck = students.searchStudents(students.ID, toAdd.getUID());
 
 			//if to check == 0 then student doesnt exsist
-			if (toCheck.size() < 100) // add more than one student with same ID
+			if (toCheck.size() < 100)
 			{
 				//make sure the student is valid
 				if (!toAdd.isValidStudent())

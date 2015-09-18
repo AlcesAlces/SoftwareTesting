@@ -4,13 +4,12 @@
 //save students into the data base file so that the it can be uploaded to the program later
 void fileIO::saveStudents(std::vector<Student> studList){
 	std::ofstream myfile;
-	std::ofstream testfile;
 	myfile.open("Database.txt");
 
 	for (std::vector<Student>::size_type i = 0; i < studList.size()-1; i++) {
 		Student stud = studList[i];
 		
-		testfile << stud.getName() << ", " << stud.getUID() <<", "<< stud.getEmail() << ", " << stud.getEssay1Grade() << ", " <<
+		myfile << stud.getName() << ", " << stud.getUID() << ", " << stud.getEmail() << ", " << stud.getEssay1Grade() << ", " <<
 			stud.getEssay2Grade() << ", " << stud.getTermProjGrade() << "\n";
 
 	}

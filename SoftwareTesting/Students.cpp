@@ -15,7 +15,7 @@ Students::Students(std::vector<Student> toAdd)
 {
 	for (int i = 0; i < toAdd.size()+1; ++i)
 	{
-		StudentList.push_back(toAdd[i + 1]);
+		StudentList.push_back(toAdd[i]);
 	}
 }
 
