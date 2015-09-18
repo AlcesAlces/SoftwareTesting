@@ -13,5 +13,9 @@ Student.o: Student.cpp Student.h
 Students.o: Students.cpp Students.h
 	g++ -c Students.cpp
 
+run:
+	@MAKE && ./SoftwareTesting
+
+
 clean:
 	rm SoftwareTesting fileIO.o Student.o Students.o SoftwareTesting.o
